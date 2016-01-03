@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{2A6A748B-501D-BDA6-2B09-75AD39B20F61}") = "Repeat the figure", "Assembly-CSharp.csproj", "{A7172D06-E953-DC68-12E9-C671E5DFD39A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7172D06-E953-DC68-12E9-C671E5DFD39A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7172D06-E953-DC68-12E9-C671E5DFD39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7172D06-E953-DC68-12E9-C671E5DFD39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7172D06-E953-DC68-12E9-C671E5DFD39A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
