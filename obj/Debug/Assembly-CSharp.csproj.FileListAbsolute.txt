@@ -19,3 +19,5 @@ D:\Learning\Unity\Repeat the figure\Temp\bin\Debug\UnityEngine.Networking.xml
 D:\Learning\Unity\Repeat the figure\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 D:\Learning\Unity\Repeat the figure\obj\Debug\Assembly-CSharp.dll
 D:\Learning\Unity\Repeat the figure\obj\Debug\Assembly-CSharp.pdb
+D:\Learning\Unity\Repeat_the_figure\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+D:\Learning\Unity\Repeat_the_figure\obj\Debug\Assembly-CSharp.dll

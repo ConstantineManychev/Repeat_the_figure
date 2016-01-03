@@ -8,6 +8,7 @@ public class DrawLineScript : MonoBehaviour
 
     public static int points=0;
     public GUIText scoreText;
+    public GUIText timeText;
 
     public Transform sled;
 
@@ -18,7 +19,6 @@ public class DrawLineScript : MonoBehaviour
     public GameObject fourP;
     private GameObject figure;
     private GameObject figureObj;
-
 
     public static int timeToLoose=30;
     private LineRenderer line;
@@ -58,13 +58,13 @@ public class DrawLineScript : MonoBehaviour
         scoreText.text = "Счет: " + points;//Обновить текст очков
 
         figureChoose();
-
     }
 
     void Update ()
     {
         timeLeft -= Time.deltaTime;//отсчет таймера
         timeToCheck += Time.deltaTime;//прибавление времени
+        timeText.text = "" + timeLeft;//Обновить текст очков
 
         //когда вышло время
         if (timeLeft <= 0.0f)
@@ -74,10 +74,31 @@ public class DrawLineScript : MonoBehaviour
             looseMenu = true;
         }
 
+        //для прикосновения к экрану
+        foreach (Touch touch in Input.touches)
+        {
+            //если текущее положение курсора отличается от сохраненного
+            if (Camera.main.ScreenToWorldPoint(touch.position) != mouseP)
+            {
+                mouseP = Camera.main.ScreenToWorldPoint(touch.position);
+                timeToCheck = 0;//обнуляем таймер простоя
+                mouseMoved = true;
+                Instantiate(sled, Camera.main.ScreenToWorldPoint(touch.position), this.transform.rotation);
+            }
+
+            //если курсор был смещен от установленного угла и не двигается 10 миллисекунд
+            else if (angleNum < maxAngle && timeToCheck >= 0.5f && mouseMoved == true)
+            {
+                timeToCheck = 0;//обнуляем таймер простоя
+                SetTouchPos(angleNum, touch);
+                angleNum++;//аереходим на след. угол
+            }
+        }
+
         //при нажатии левой клавиши мыши
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Instantiate(sled, Camera.main.ScreenToWorldPoint(Input.mousePosition), this.transform.rotation);
+            Instantiate(sled, Camera.main.ScreenToWorldPoint(Input.mousePosition), this.transform.rotation);//создаем частицы по координатам мышки
             SetMousePos(angleNum);
             timeToCheck = 0;
             angleNum++;
@@ -167,7 +188,7 @@ public class DrawLineScript : MonoBehaviour
                 break;
 
         }
-        Instantiate(figure, new Vector3(0, 4, 0), this.transform.rotation);
+        Instantiate(figure, new Vector3(0, 3, 0), this.transform.rotation);
     }
 
     //Установка точки ломаной линии по координатам мышки
@@ -180,6 +201,17 @@ public class DrawLineScript : MonoBehaviour
         line.SetPosition(i, new Vector3(mousePos[i].x, mousePos[i].y, 0));//устанавливаем угол по координатам
         mouseMoved = false;//
     }
+
+    void SetTouchPos(int i, Touch touch)
+    {
+        mousePos[i] = Input.mousePosition;//смотрим координаты курсора
+        mousePos[i] = Camera.main.ScreenToWorldPoint(touch.position);//относительно центра камеры
+        mouseP = mousePos[i];
+        line.SetVertexCount(i + 1);//Добавляем угол
+        line.SetPosition(i, new Vector3(mousePos[i].x, mousePos[i].y, 0));//устанавливаем угол по координатам
+        mouseMoved = false;//
+    }
+
 
     //находим углы a,b,c,d и расчитываем отношение между сторонами нарисованной фигуры и требуемой
     void sootnoshenie(int ugli)
